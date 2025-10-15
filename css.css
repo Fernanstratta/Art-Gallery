@@ -1,95 +1,24 @@
 body {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
   background: #f4f4f4;
   margin: 0;
   padding: 20px;
-}
-
-canvas.recuadros {
-  width: 300px;
-  height: 300px;
-  border: 2px solid black;
-  background: white;
-}
-
-body {
-  margin: 0;
-  background: #121212;
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
 }
 
 .gallery {
-  position: relative;
-  width: 900px;
-  height: 500px;
-  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+  width: 90%;
+  max-width: 1200px;
 }
 
-.recuadros {
-  position: absolute;
+canvas.recuadros {
   width: 100%;
-  height: 100%;
-  border-radius: 20px;
-  background: #222;
-  transition: opacity 0.8s ease, transform 0.8s ease;
-  opacity: 0;
-  transform: scale(0.85);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-  width: 100%; height: auto;
-aspect-ratio: 3 / 2; 
-display: block;
-background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00));
-border-radius: 16px;
-box-shadow: 0 10px 30px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.05);
-
+  height: 250px;
+  border: 2px solid black;
+  border-radius: 16px;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
-
-.recuadros.active {
-  opacity: 1;
-  transform: scale(1);
-  z-index: 2;
-}
-
-.controls {
-  position: absolute;
-  bottom: 20px;
-  right: 30px;
-  display: flex;
-  gap: 10px;
-}
-
-button {
-  width: 50px;
-  height: 50px;
-  font-size: 1.5rem;
-  border: none;
-  background: rgba(255,255,255,0.15);
-  color: white;
-  border-radius: 50%;
-  cursor: pointer;
-  backdrop-filter: blur(4px);
-}
-
-button:hover {
-  background: rgba(255,255,255,0.3);
-}
-
-
-.nunito-sans-wow {
-  font-family: "Nunito Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 280;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 100,
-    "YTLC" 500;
-}
-
-
-  
-
