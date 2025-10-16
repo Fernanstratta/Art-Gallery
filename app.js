@@ -43,7 +43,7 @@ function dib0() {
     ctx.fillRect(0, 0, c.width, c.height);
 
 
-    // Sharingan circles
+   
     ctx.fillStyle = "red";
     ctx.beginPath();
     ctx.arc(150, 125, 55, 0, 2 * Math.PI);
@@ -116,7 +116,7 @@ function dib1() {
     ctx.fillStyle = bg;
     ctx.fillRect(0, 0, c.width, c.height);
 
-    // draw colorful curves
+    
     for (let i = 0; i < numCurves; i++) {
       const offset = (i - numCurves / 2) * 15;
       const phase = t * 0.02 + i * 0.4;
@@ -187,14 +187,14 @@ function dib2() {
     
     ctx.fillStyle = '#00ccffff';
     ctx.beginPath();
-    ctx.moveTo(170, 210); // bottom-left
+    ctx.moveTo(170, 210); 
     ctx.bezierCurveTo(180, 180, 200, 180, 225, 195); 
     ctx.bezierCurveTo(215, 160, 200, 145, 200, 140); 
     ctx.bezierCurveTo(185, 145, 160, 150, 160, 150); 
     ctx.closePath();
     ctx.fill();
 
-    // Ellipse top
+   
     const color = `hsl(${hue}, 80%, 60%)`;
     ctx.fillStyle = color;
     ctx.beginPath();
