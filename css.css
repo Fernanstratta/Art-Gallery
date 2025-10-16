@@ -1,43 +1,78 @@
 html, body {
-  height: 100%;               
+  height: 100%;
   margin: 0;
 }
 
 body {
-  background: #f4f4f4;
   display: flex;
-  justify-content: center;     
-  align-items: center;         
+  justify-content: center;
+  align-items: center;
   padding: 20px;
   font-family: sans-serif;
+  background: linear-gradient(270deg, #ff0080, #7928ca, #00bfff, #00ff80);
+  background-size: 800% 800%;
+  animation: fondoMoviendose 14s ease infinite;
+  overflow: hidden;
 }
 
+/* Fondo animado del body */
+@keyframes fondoMoviendose {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Contenedor de las canvases */
 .gallery {
   display: flex;
-  flex-direction: row;        
-  gap: 40px;                   
-  overflow-x: auto;            
-  padding-bottom: 10px;        
+  flex-direction: row;
+  gap: 40px;
+  overflow-x: visible;
+  padding: 30px 40px;
+  border-radius: 20px;
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
 }
 
+/* Contenedor individual */
 .canvas-container {
-  flex: 0 0 auto;             
-  background: #fdfdfd;         
+  flex: 0 0 auto;
+  background: #fdfdfd;
   padding: 16px;
-  border: 12px solid #333;     
+  border: 12px solid #333;
   border-radius: 8px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: transform 0.3s ease;
 }
 
-.canvas-container canvas {
+.canvas-container:hover {
+  transform: scale(1.1);
+  z-index: 10;
+}
+
+/* Canvases */
+canvas {
   display: block;
   background: white;
   border-radius: 4px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
+canvas:hover {
+  transform: scale(3);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  content-visibility: auto;
+}
+
+/* Texto debajo de cada canvas */
 .caption {
   margin-top: 12px;
   font-size: 16px;
