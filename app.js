@@ -44,10 +44,11 @@ function dib0() {
   function animate() {
     ctx.clearRect(0, 0, c.width, c.height);
 
-    // Grayscale gradient background
+
     const gradient = ctx.createLinearGradient(0, 0, 0, c.height);
-    gradient.addColorStop(0, '#ffffff'); // top: white
-    gradient.addColorStop(1, '#555555'); // bottom: dark gray
+    gradient.addColorStop(0, '#ffffff'); 
+    gradient.addColorStop(1, '#555555'); 
+
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, c.width, c.height);
 
@@ -218,16 +219,33 @@ function dib3() {
   c.width = c.clientWidth;
   c.height = c.clientHeight;
 
-  const amplitude = 10; // small vertical movement
+  const amplitude = 10; 
   const speed = 0.03;
 
   let angle = 0;
 
   function draw(offsetX, offsetY) {
+
+    ctx.clearRect(0, 0, c.width, c.height);
+    ctx.fillStyle = '#7aebffff';
+    ctx.fillRect(0, 0, c.width, c.height);
+
+    const gradient = ctx.createLinearGradient(0, 0, 0, c.height);
+    gradient.addColorStop(0, '#00d9ffff'); 
+    gradient.addColorStop(1, '#7aebffff'); 
+
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, c.width, c.height);
+
+    ctx.fillStyle = '#e6bf78ff';
+    ctx.beginPath();
+    ctx.arc(150, 490, 300, 0, 2 * Math.PI, true);
+    ctx.fill();
+    ctx.closePath();
+
     const baseX = c.width / 2;
     const baseY = c.height / 2 + 20; 
 
-    // Scaled body points
     const cp3 = { x: baseX - 40 + offsetX, y: baseY + 20 + offsetY };
     const cp4 = { x: baseX, y: baseY - 20 - offsetY / 2 };
     const cp5 = { x: baseX + 40, y: baseY + 20 - offsetY };
@@ -275,6 +293,8 @@ function dib3() {
     ctx.beginPath();
     ctx.arc(baseX, baseY - 35 - offsetY / 2, 12, 0, 2 * Math.PI);
     ctx.fill();
+
+    
   }
 
   function Move() {
