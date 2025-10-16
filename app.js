@@ -145,6 +145,9 @@ function dib1() {
     }
 
     t += 1;
+    ctx.fillStyle = 'white';
+    ctx.font = '18px sans-serif';
+    ctx.fillText("Survival", 15, 30);
     requestAnimationFrame(draw);
   }
 
@@ -160,46 +163,45 @@ function dib2() {
   c.height = c.clientHeight;
 
   let hue = 0;
-
-  // Base x offset for the group of circles
   let offsetX = 0;
-  let direction = 1; // 1 = right, -1 = left
-  const speed = 1;   // pixels per frame
+  let direction = 1; 
+  const speed = 1;   
 
-  // Relative positions of the purple circles
-  const alph = 1;
   const circles = [
-  {x: 200, y: 50, r: 20, a: .7},
-  {x: 155, y: 60, r: 20, a: .7},
-  {x: 180, y: 30, r: 20, a: .7},
-  {x: 200, y: 70, r: 20, a: .7},
-  {x: 180, y: 70, r: 20, a: .7},
-  {x: 150, y: 50, r: 20, a: .7},
-  {x: 180, y: 50, r: 20, a: .9},
-];
+    {x: 200, y: 50, r: 20, a: .7},
+    {x: 155, y: 60, r: 20, a: .7},
+    {x: 180, y: 30, r: 20, a: .7},
+    {x: 200, y: 70, r: 20, a: .7},
+    {x: 180, y: 70, r: 20, a: .7},
+    {x: 150, y: 50, r: 20, a: .7},
+    {x: 180, y: 50, r: 20, a: .9},
+  ];
 
   function draw() {
     ctx.clearRect(0, 0, c.width, c.height);
+
+    // Background
     ctx.fillStyle = '#000000ff';
     ctx.fillRect(0, 0, c.width, c.height);
 
-
+    // Mushroom cap / pink base
     ctx.fillStyle = '#fd00c1';
     ctx.beginPath();
-    ctx.arc(190, 490, 300, 0, 2 * Math.PI, true);
+    ctx.arc(190, 490, 320, 0, 2 * Math.PI, true);
     ctx.fill();
     ctx.closePath();
 
+    // Stem with Bezier curves
     ctx.fillStyle = '#00ccffff';
     ctx.beginPath();
-    ctx.moveTo(170, 210);
-    ctx.lineTo(225, 195);
-    ctx.lineTo(200, 140);
-    ctx.lineTo(160, 150);
+    ctx.moveTo(170, 210); // bottom-left
+    ctx.bezierCurveTo(180, 180, 200, 180, 225, 195); // left to bottom-right
+    ctx.bezierCurveTo(215, 160, 200, 145, 200, 140); // top-right
+    ctx.bezierCurveTo(185, 145, 160, 150, 160, 150); // top-left
     ctx.closePath();
     ctx.fill();
 
-
+    // Ellipse top
     const color = `hsl(${hue}, 80%, 60%)`;
     ctx.fillStyle = color;
     ctx.beginPath();
@@ -217,32 +219,44 @@ function dib2() {
     ctx.closePath();
     hue = (hue + 1) % 360;
 
-
+    // Purple cloud circles moving sideways
     circles.forEach(circle => {
-  ctx.fillStyle = `rgba(133, 3, 226, ${circle.a})`; 
-  ctx.beginPath();
-  ctx.arc(circle.x + offsetX, circle.y, circle.r, 0, 2 * Math.PI);
-  ctx.fill();
-  ctx.closePath();
-});
+      ctx.fillStyle = `rgba(133, 3, 226, ${circle.a})`; 
+      ctx.beginPath();
+      ctx.arc(circle.x + offsetX, circle.y, circle.r, 0, 2 * Math.PI);
+      ctx.fill();
+      ctx.closePath();
+    });
 
- 
+    // Cloud outline with Bezier for a flowing shape
+    ctx.strokeStyle = 'rgba(133,3,226,0.6)';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(circles[0].x + offsetX - circles[0].r, circles[0].y);
+    ctx.bezierCurveTo(
+      circles[1].x + offsetX, circles[1].y - 30,
+      circles[2].x + offsetX, circles[2].y - 20,
+      circles[3].x + offsetX + circles[3].r, circles[3].y
+    );
+    ctx.stroke();
+
+    // Update offset for sideways movement
     offsetX += speed * direction;
-
-
     const groupLeft = Math.min(...circles.map(c => c.x)) + offsetX - 20; 
     const groupRight = Math.max(...circles.map(c => c.x)) + offsetX + 20; 
     if (groupRight > c.width || groupLeft < 0) direction *= -1;
 
+    // Label
     ctx.fillStyle = 'white';
     ctx.font = '18px sans-serif';
-    ctx.fillText("canvas 3", 15, 30);
+    ctx.fillText("Mushroom", 15, 30);
 
     requestAnimationFrame(draw);
   }
 
   draw();
 }
+
 
 
 
@@ -325,6 +339,9 @@ function dib3() {
     ctx.arc(baseX, baseY - 35 - offsetY / 2, 12, 0, 2 * Math.PI);
     ctx.fill();
 
+    ctx.fillStyle = 'white';
+    ctx.font = '18px sans-serif';
+    ctx.fillText("Dancing", 15, 30);
     
   }
 
@@ -475,6 +492,10 @@ const weight2 = { x: 190, y: 10 };
     ctx.bezierCurveTo(mouthWeight1.x, mouthWeight1.y, mouthWeight2.x, mouthWeight2.y, mouthCp2.x, mouthCp2.y);
     ctx.stroke();
     ctx.closePath();
+
+    ctx.fillStyle = 'white';
+    ctx.font = '18px sans-serif';
+    ctx.fillText("Basics", 15, 30);
 
     requestAnimationFrame(draw);
   }
