@@ -24,18 +24,15 @@ function dib0() {
   let rotation = 0; 
   
   function drawSymbol(angle) {
-    
     ctx.save();
     ctx.translate(150, 125); 
     ctx.rotate(angle);
 
- 
     ctx.fillStyle = "black";
     ctx.beginPath();
     ctx.arc(38, 0, 10, 0, 1.25 * Math.PI, 1);
     ctx.fill();
     ctx.closePath();
-
 
     ctx.beginPath();
     ctx.arc(38, -5, 7, 0, 2 * Math.PI);
@@ -47,21 +44,21 @@ function dib0() {
   function animate() {
     ctx.clearRect(0, 0, c.width, c.height);
 
-
-    ctx.fillStyle = '#ffffff';
+    // Grayscale gradient background
+    const gradient = ctx.createLinearGradient(0, 0, 0, c.height);
+    gradient.addColorStop(0, '#ffffff'); // top: white
+    gradient.addColorStop(1, '#555555'); // bottom: dark gray
+    ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, c.width, c.height);
-
 
     ctx.fillStyle = 'black';
     ctx.font = '18px sans-serif';
     ctx.fillText('Sharingan', 15, 30);
 
-
     ctx.fillStyle = "red";
     ctx.beginPath();
     ctx.arc(150, 125, 55, 0, 2 * Math.PI);
     ctx.fill();
-
 
     ctx.fillStyle = "black";
     ctx.beginPath();
@@ -73,17 +70,14 @@ function dib0() {
     ctx.arc(150, 125, 38, 0, 2 * Math.PI);
     ctx.fill();
 
-
     ctx.fillStyle = "black";
     ctx.beginPath();
     ctx.arc(150, 125, 12, 0, 2 * Math.PI);
     ctx.fill();
 
- 
     for (let i = 0; i < 3; i++) {
       drawSymbol(rotation + (i * (2 * Math.PI / 3))); 
     }
-
 
     rotation += 0.02;
 
@@ -92,6 +86,7 @@ function dib0() {
 
   animate();
 }
+
 
 
 function dib1() {
