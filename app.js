@@ -311,13 +311,10 @@ function dib4() {
 
   c.width = c.clientWidth;
   c.height = c.clientHeight;
-    ctx.clearRect(0, 0, c.width, c.height);
-    const gradient = ctx.createLinearGradient(0, 0, 0, c.height);
-    gradient.addColorStop(0, '#00d9ffff'); 
-    gradient.addColorStop(1, '#7aebffff'); 
+    
+    
 
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, c.width, c.height);
+    
 
 
 
@@ -342,7 +339,12 @@ function dib4() {
 
   function draw() {
     ctx.clearRect(0, 0, c.width, c.height);
+    const gradient = ctx.createLinearGradient(0, 0, 0, c.height);
+    gradient.addColorStop(0, '#00d9ffff'); 
+    gradient.addColorStop(1, '#7aebffff'); 
 
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, c.width, c.height);
     
     ctx.fillStyle = '#12b611';
     ctx.beginPath();
