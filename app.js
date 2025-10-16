@@ -43,9 +43,7 @@ function dib0() {
     ctx.fillRect(0, 0, c.width, c.height);
 
     
-    ctx.fillStyle = 'black';
-    ctx.font = '18px sans-serif';
-    ctx.fillText('Sharingan', 15, 30);
+    
 
     // Sharingan circles
     ctx.fillStyle = "red";
@@ -145,9 +143,6 @@ function dib1() {
     }
 
     t += 1;
-    ctx.fillStyle = 'white';
-    ctx.font = '18px sans-serif';
-    ctx.fillText("Survival", 15, 30);
     requestAnimationFrame(draw);
   }
 
@@ -180,24 +175,24 @@ function dib2() {
   function draw() {
     ctx.clearRect(0, 0, c.width, c.height);
 
-    // Background
+    
     ctx.fillStyle = '#000000ff';
     ctx.fillRect(0, 0, c.width, c.height);
 
-    // Mushroom cap / pink base
+    
     ctx.fillStyle = '#fd00c1';
     ctx.beginPath();
     ctx.arc(190, 490, 320, 0, 2 * Math.PI, true);
     ctx.fill();
     ctx.closePath();
 
-    // Stem with Bezier curves
+    
     ctx.fillStyle = '#00ccffff';
     ctx.beginPath();
     ctx.moveTo(170, 210); // bottom-left
-    ctx.bezierCurveTo(180, 180, 200, 180, 225, 195); // left to bottom-right
-    ctx.bezierCurveTo(215, 160, 200, 145, 200, 140); // top-right
-    ctx.bezierCurveTo(185, 145, 160, 150, 160, 150); // top-left
+    ctx.bezierCurveTo(180, 180, 200, 180, 225, 195); 
+    ctx.bezierCurveTo(215, 160, 200, 145, 200, 140); 
+    ctx.bezierCurveTo(185, 145, 160, 150, 160, 150); 
     ctx.closePath();
     ctx.fill();
 
@@ -219,7 +214,7 @@ function dib2() {
     ctx.closePath();
     hue = (hue + 1) % 360;
 
-    // Purple cloud circles moving sideways
+   
     circles.forEach(circle => {
       ctx.fillStyle = `rgba(133, 3, 226, ${circle.a})`; 
       ctx.beginPath();
@@ -228,7 +223,7 @@ function dib2() {
       ctx.closePath();
     });
 
-    // Cloud outline with Bezier for a flowing shape
+    
     ctx.strokeStyle = 'rgba(133,3,226,0.6)';
     ctx.lineWidth = 3;
     ctx.beginPath();
@@ -240,16 +235,12 @@ function dib2() {
     );
     ctx.stroke();
 
-    // Update offset for sideways movement
+    
     offsetX += speed * direction;
     const groupLeft = Math.min(...circles.map(c => c.x)) + offsetX - 20; 
     const groupRight = Math.max(...circles.map(c => c.x)) + offsetX + 20; 
     if (groupRight > c.width || groupLeft < 0) direction *= -1;
 
-    // Label
-    ctx.fillStyle = 'white';
-    ctx.font = '18px sans-serif';
-    ctx.fillText("Mushroom", 15, 30);
 
     requestAnimationFrame(draw);
   }
@@ -339,9 +330,7 @@ function dib3() {
     ctx.arc(baseX, baseY - 35 - offsetY / 2, 12, 0, 2 * Math.PI);
     ctx.fill();
 
-    ctx.fillStyle = 'white';
-    ctx.font = '18px sans-serif';
-    ctx.fillText("Dancing", 15, 30);
+   
     
   }
 
@@ -371,22 +360,14 @@ function dib4() {
   c.width = c.clientWidth;
   c.height = c.clientHeight;
     
-    
-
-    
-
-
-
   const cp3 = { x: 150, y: 225 };
   const cp4 = { x: 150, y: 50 };
-
-    
-
-  // Eye positions
+  
+  // Eye pos
   const leftEye = { x: 120, y: 75, radius: 20 };
   const rightEye = { x: 180, y: 75, radius: 20 };
   const pupilRadius = 8;
-  const pupilMaxOffset = 8; // how far the pupil can move inside the eye
+  const pupilMaxOffset = 8; 
 
   // Track mouse
   let mouse = { x: leftEye.x, y: leftEye.y };
@@ -428,12 +409,12 @@ function dib4() {
 
     
     [leftEye, rightEye].forEach(eye => {
-      // Calculate direction to mouse
+      // mouse
       const dx = mouse.x - eye.x;
       const dy = mouse.y - eye.y;
       const angle = Math.atan2(dy, dx);
 
-      // Pupil position with limit
+      // Pupil 
       const px = eye.x + Math.cos(angle) * pupilMaxOffset;
       const py = eye.y + Math.sin(angle) * pupilMaxOffset;
 
@@ -493,9 +474,7 @@ const weight2 = { x: 190, y: 10 };
     ctx.stroke();
     ctx.closePath();
 
-    ctx.fillStyle = 'white';
-    ctx.font = '18px sans-serif';
-    ctx.fillText("Basics", 15, 30);
+   
 
     requestAnimationFrame(draw);
   }
