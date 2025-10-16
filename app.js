@@ -98,64 +98,7 @@ function dib0() {
 function dib1() {
   const c = document.getElementById('canva2');
   const ctx = c.getContext('2d');
-  const img = new Image();
-
-  img.src = 'Weezer.png';
-  img.crossOrigin = "anonymous";
-
-  img.onload = () => {
-    c.width = 300;
-    c.height = 300;
-
-    let hueOffset = 0; 
-
-    const bg = { r: 0x18, g: 0x9B, b: 0xCC };
-    const tolerance = 40;
-
-    function animate() {
-      ctx.drawImage(img, 0, 0, c.width, c.height);
-
-      const imgData = ctx.getImageData(0, 0, c.width, c.height);
-      const data = imgData.data;
-
-      for (let y = 0; y < c.height; y++) {
-        for (let x = 0; x < c.width; x++) {
-          const i = (y * c.width + x) * 4;
-          const r = data[i];
-          const g = data[i + 1];
-          const b = data[i + 2];
-
-          const dist = Math.sqrt((r - bg.r) ** 2 + (g - bg.g) ** 2 + (b - bg.b) ** 2);
-
-          if (dist > tolerance) {
-            const hue = (hueOffset + (x / c.width) * 360) % 360;
-            const color = hslToRgb(hue, 100, 50);
-
-            data[i] = color.r;
-            data[i + 1] = color.g;
-            data[i + 2] = color.b;
-            data[i + 3] = 255;
-          }
-        }
-      }
-
-      ctx.putImageData(imgData, 0, 0);
-      hueOffset = (hueOffset + 1) % 360; 
-      requestAnimationFrame(animate);
-    }
-
-    animate();
-  };
-}
-
-function hslToRgb(h, s, l) {
-  s /= 100;
-  l /= 100;
-  const k = n => (n + h / 30) % 12;
-  const a = s * Math.min(l, 1 - l);
-  const f = n =>
-    l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)));
-  return { r: Math.round(f(0) * 255), g: Math.round(f(8) * 255), b: Math.round(f(4) * 255) };
+  
 }
 
 
