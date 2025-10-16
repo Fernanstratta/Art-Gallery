@@ -13,7 +13,7 @@ function dib0() {
   const ctx = c.getContext("2d");
 
   let rotation = 0; 
-  
+
   function drawSymbol(angle) {
     ctx.save();
     ctx.translate(150, 125); 
@@ -35,18 +35,19 @@ function dib0() {
   function animate() {
     ctx.clearRect(0, 0, c.width, c.height);
 
-
+    
     const gradient = ctx.createLinearGradient(0, 0, 0, c.height);
     gradient.addColorStop(0, '#ffffff'); 
     gradient.addColorStop(1, '#555555'); 
-
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, c.width, c.height);
 
+    
     ctx.fillStyle = 'black';
     ctx.font = '18px sans-serif';
     ctx.fillText('Sharingan', 15, 30);
 
+    // Sharingan circles
     ctx.fillStyle = "red";
     ctx.beginPath();
     ctx.arc(150, 125, 55, 0, 2 * Math.PI);
@@ -57,7 +58,6 @@ function dib0() {
     ctx.arc(150, 125, 40, 0, 2 * Math.PI);
     ctx.fill();
 
-    
     ctx.fillStyle = "red";
     ctx.beginPath();
     ctx.arc(150, 125, 38, 0, 2 * Math.PI);
@@ -68,9 +68,18 @@ function dib0() {
     ctx.arc(150, 125, 12, 0, 2 * Math.PI);
     ctx.fill();
 
+    
     for (let i = 0; i < 3; i++) {
       drawSymbol(rotation + (i * (2 * Math.PI / 3))); 
     }
+
+    
+    ctx.strokeStyle = '#000';
+    ctx.lineWidth = 6;
+    ctx.beginPath();
+    ctx.moveTo(80, 100);               
+    ctx.bezierCurveTo(120, 40, 180, 40, 230, 70); 
+    ctx.stroke();
 
     rotation += 0.02;
 
@@ -82,6 +91,7 @@ function dib0() {
 
 
 
+
 function dib1() {
   const c = document.getElementById('canva2');
   const ctx = c.getContext('2d');
@@ -89,26 +99,58 @@ function dib1() {
   c.width = c.clientWidth;
   c.height = c.clientHeight;
 
+  const numCurves = 25;      
+  const amplitude = 40;      
+  const baseY = c.height / 2;
+  const colors = [];
 
-  const img = new Image();
-  img.src = 'Weezer.png';
-  img.onload = function() {
-    ctx.imageSmoothingEnabled = false;
-    ctx.drawImage(img, 0, 0, c.width, c.height);
-  };
-
-  
-  let hue = 0;
-  function updateGradient() {
-    const color1 = `hsl(${hue}, 80%, 60%)`;
-    const color2 = `hsl(${(hue + 60) % 360}, 80%, 60%)`;
-    c.style.backgroundImage = `linear-gradient(to right, ${color1}, ${color2})`;
-    hue = (hue + 1) % 360;
-    requestAnimationFrame(updateGradient);
+  //hue
+  for (let i = 0; i < numCurves; i++) {
+    const hue = Math.floor((i / numCurves) * 360);
+    colors.push(`hsl(${hue}, 90%, 60%)`);
   }
 
-  updateGradient(); 
+  let t = 0;
+
+  function draw() {
+    ctx.clearRect(0, 0, c.width, c.height);
+    const bg = ctx.createLinearGradient(0, 0, c.width, c.height);
+    bg.addColorStop(0, "#020202");
+    bg.addColorStop(1, "#111");
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, c.width, c.height);
+
+    // draw colorful curves
+    for (let i = 0; i < numCurves; i++) {
+      const offset = (i - numCurves / 2) * 15;
+      const phase = t * 0.02 + i * 0.4;
+
+      const start = { x: 0, y: baseY + offset };
+      const end = { x: c.width, y: baseY + offset + Math.sin(phase) * 10 };
+
+      const cp1 = { x: c.width * 0.25, y: baseY + Math.sin(phase + 1) * amplitude };
+      const cp2 = { x: c.width * 0.75, y: baseY + Math.sin(phase + 2) * amplitude };
+
+      const gradient = ctx.createLinearGradient(0, 0, c.width, 0);
+      gradient.addColorStop(0, colors[i]);
+      gradient.addColorStop(1, "white");
+
+      ctx.lineWidth = 2.5;
+      ctx.strokeStyle = gradient;
+
+      ctx.beginPath();
+      ctx.moveTo(start.x, start.y);
+      ctx.bezierCurveTo(cp1.x, cp1.y, cp2.x, cp2.y, end.x, end.y);
+      ctx.stroke();
+    }
+
+    t += 1;
+    requestAnimationFrame(draw);
+  }
+
+  draw();
 }
+
 
 function dib2() {
   const c = document.getElementById('canva3');
@@ -418,6 +460,19 @@ const weight2 = { x: 190, y: 10 };
     ctx.beginPath();
     ctx.moveTo(cp5.x, cp5.y);
     ctx.bezierCurveTo(weight5.x, weight5.y, weight6.x, weight6.y, cp6.x, cp6.y);
+    ctx.stroke();
+    ctx.closePath();
+
+    //Mouth
+    ctx.strokeStyle = "#ff002bff";
+    ctx.lineWidth = 2;
+    const mouthCp1 = { x: 120, y: 140 };
+    const mouthCp2 = { x: 180, y: 140 };
+    const mouthWeight1 = { x: 130, y: 130 };
+    const mouthWeight2 = { x: 170, y: 130 };
+    ctx.beginPath();
+    ctx.moveTo(mouthCp1.x, mouthCp1.y);
+    ctx.bezierCurveTo(mouthWeight1.x, mouthWeight1.y, mouthWeight2.x, mouthWeight2.y, mouthCp2.x, mouthCp2.y);
     ctx.stroke();
     ctx.closePath();
 
