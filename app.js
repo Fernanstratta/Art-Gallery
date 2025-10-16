@@ -42,8 +42,6 @@ function dib0() {
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, c.width, c.height);
 
-    
-    
 
     // Sharingan circles
     ctx.fillStyle = "red";
